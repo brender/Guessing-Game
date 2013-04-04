@@ -9,4 +9,10 @@
 --		1. Run "./build.sh".
 --		2. Run "./guessing". The "guessing" file is the program.
 
-main = putStrLn "Hello World"
+import System.Random
+
+main :: IO ()
+main = do
+	randomNumber <- randomRIO (1, 100) :: IO Integer
+	print randomNumber
+
