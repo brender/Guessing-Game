@@ -19,10 +19,14 @@ main = do
 	putStr "Guess a number between 1 and 100: "
 	guess <- getLine
 
-	if read guess == randomNumber
-		then putStrLn "Good guess"
-		else if read guess > randomNumber
-			then putStrLn "Too high. Guess again."
-			else putStrLn "Too low. Guess again."
+	checkGuess (read guess) randomNumber
 
 	return ()
+
+checkGuess :: Integer -> Integer -> IO ()
+checkGuess guess realNumber = 
+	if guess == realNumber
+		then putStrLn "Good guess"
+		else if guess > realNumber
+			then putStrLn "Too high. Guess again."
+			else putStrLn "Too low. Guess again."
