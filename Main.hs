@@ -21,6 +21,8 @@ main = do
 
 	if read guess == randomNumber
 		then putStrLn "Good guess"
-		else putStrLn "Guess again"
+		else if read guess > randomNumber
+			then putStrLn "Too high. Guess again."
+			else putStrLn "Too low. Guess again."
 
 	return ()
