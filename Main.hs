@@ -24,9 +24,7 @@ main = do
 	return ()
 
 checkGuess :: Integer -> Integer -> IO ()
-checkGuess guess realNumber = 
-	if guess == realNumber
-		then putStrLn "Good guess"
-		else if guess > realNumber
-			then putStrLn "Too high. Guess again."
-			else putStrLn "Too low. Guess again."
+checkGuess guess realNumber
+	| guess < realNumber = putStrLn "Too low. Guess again."
+	| guess > realNumber = putStrLn "Too high. Guess again."
+	| otherwise = putStrLn "Good guess."
