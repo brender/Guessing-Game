@@ -14,5 +14,9 @@ import System.Random
 main :: IO ()
 main = do
 	randomNumber <- randomRIO (1, 100) :: IO Integer
-	print randomNumber
+	print randomNumber -- get rid of later
 
+	putStr "Enter a number between 1 and 100: "
+	getLine
+
+	return ()
