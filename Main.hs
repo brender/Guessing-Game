@@ -16,7 +16,11 @@ main = do
 	randomNumber <- randomRIO (1, 100) :: IO Integer
 	print randomNumber -- get rid of later
 
-	putStr "Enter a number between 1 and 100: "
-	getLine
+	putStr "Guess a number between 1 and 100: "
+	guess <- getLine
+
+	if read guess == randomNumber
+		then putStrLn "Good guess"
+		else putStrLn "Guess again"
 
 	return ()
