@@ -16,17 +16,18 @@ main = do
 	randomNumber <- randomRIO (1, 100) :: IO Integer
 
 	putStr "Guess a number between 1 and 100: "
-	getGuessAndCheckAgainst randomNumber
+	getGuessAndCheckAgainst randomNumber 10
 
-getGuessAndCheckAgainst :: Integer -> IO ()
-getGuessAndCheckAgainst realNumber = do
+getGuessAndCheckAgainst :: Integer -> Integer -> IO ()
+getGuessAndCheckAgainst _ 0 = putStrLn "You Lose. Boo."
+getGuessAndCheckAgainst realNumber guessesLeft = do
 	guess <- getLine
 	b <- checkGuess (read guess) realNumber
 
 	-- if CONDITION then TRUE else FALSE
 	if b
 		then return ()
-		else getGuessAndCheckAgainst realNumber
+		else getGuessAndCheckAgainst realNumber $ guessesLeft - 1
 
 checkGuess :: Integer -> Integer -> IO Bool
 checkGuess guess realNumber
@@ -39,5 +40,5 @@ checkGuess guess realNumber
 		return False
 
 	| otherwise = do
-		putStrLn "Good guess."
+		putStrLn "Good guess. You win."
 		return True
