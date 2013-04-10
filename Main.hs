@@ -1,7 +1,7 @@
 -- To run the program:
 --
 -- Using GHCi:
---		1. Run "ghci main.hs".
+--		1. Run "ghci main.hs".
 --		2. Run the "main" function.
 --		3. To reload after changes are made, run ":reload".
 --
@@ -14,17 +14,30 @@ import System.Random
 main :: IO ()
 main = do
 	randomNumber <- randomRIO (1, 100) :: IO Integer
-	print randomNumber -- get rid of later
 
 	putStr "Guess a number between 1 and 100: "
+	getGuessAndCheckAgainst randomNumber
+
+getGuessAndCheckAgainst :: Integer -> IO ()
+getGuessAndCheckAgainst realNumber = do
 	guess <- getLine
+	b <- checkGuess (read guess) realNumber
 
-	checkGuess (read guess) randomNumber
+	-- if CONDITION then TRUE else FALSE
+	if b
+		then return ()
+		else getGuessAndCheckAgainst realNumber
 
-	return ()
-
-checkGuess :: Integer -> Integer -> IO ()
+checkGuess :: Integer -> Integer -> IO Bool
 checkGuess guess realNumber
-	| guess < realNumber = putStrLn "Too low. Guess again."
-	| guess > realNumber = putStrLn "Too high. Guess again."
-	| otherwise = putStrLn "Good guess."
+	| guess < realNumber = do
+		putStrLn "Too low. Guess again."
+		return False
+
+	| guess > realNumber = do
+		putStrLn "Too high. Guess again."
+		return False
+
+	| otherwise = do
+		putStrLn "Good guess."
+		return True
